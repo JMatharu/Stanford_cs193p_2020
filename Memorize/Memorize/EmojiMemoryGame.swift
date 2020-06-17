@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     typealias Game = MemoryGame<String>
 
-    private var game: Game = EmojiMemoryGame.createGame()
+    @Published private var game: Game = EmojiMemoryGame.createGame()
     
     static func createGame() -> Game {
         let emojiArray = ["👻", "🎃", "😈", "🤡", "👽"]
-        let random = 5//Int.random(in: 2..<5)
+        let random = Int.random(in: 2..<5)
         return Game(numberOfPairOfCards: random) { pairIndex in
             emojiArray[pairIndex]
         }
@@ -34,5 +34,11 @@ class EmojiMemoryGame {
     
     func choose(card: Game.Card) {
         game.choose(card: card)
+    }
+}
+
+struct EmojiMemoryGame_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

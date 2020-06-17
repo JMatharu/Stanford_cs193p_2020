@@ -21,8 +21,17 @@ struct MemoryGame<CardContent> {
         self.cards.shuffle()
     }
     
-    func choose(card: Card) {
+    mutating func choose(card: Card) {
         print("Card Choosen: \(card)")
+        let indexOfCard = index(of: card)
+        self.cards[indexOfCard].isFaceUp = !self.cards[indexOfCard].isFaceUp
+    }
+    
+    private func index(of card: Card) -> Int {
+        for index in 0..<self.cards.count where card.id == self.cards[index].id {
+            return index
+        }
+        return 0
     }
     
     struct Card: Identifiable {
